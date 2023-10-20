@@ -1,10 +1,17 @@
 package api
 
 import (
-	"fmt"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
-func Demo(w http.ResponseWriter, _ *http.Request) {
-	_, _ = fmt.Fprintf(w, "Hello World!")
+func Demo(w http.ResponseWriter, r *http.Request) {
+	serve := gin.New()
+
+	serve.GET("/index", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"message": "Hello from demo endpoint!"})
+	})
+
+	serve.ServeHTTP(w, r)
 }
