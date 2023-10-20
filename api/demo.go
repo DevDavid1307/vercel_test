@@ -3,16 +3,16 @@ package api
 import (
 	"net/http"
 
+	"david.test.vercel_test/api_proto"
+	"david.test.vercel_test/app/demo/handler"
+
 	"github.com/gin-gonic/gin"
 )
 
 func Demo(w http.ResponseWriter, r *http.Request) {
 	serve := gin.New()
-	group := serve.Group("/api/demo")
 
-	group.GET("/index", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"message": "Hello from demo endpoint!"})
-	})
+	api_proto.RegisterDemoService(serve, handler.NewDemoHandler())
 
 	serve.ServeHTTP(w, r)
 }
