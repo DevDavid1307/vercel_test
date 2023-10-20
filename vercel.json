@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/demo/(.*)",
-      "destination": "/api/hello.go"
+      "destination": "/api/demo.go"
     }
   ]
 }
