@@ -11,7 +11,7 @@ type DemoHTTPServer interface {
 }
 
 type DemoIndexRequest struct {
-	Name string `json:"name"`
+	Name string `json:"name" uri:"name"`
 }
 
 type DemoIndexResponse struct {
