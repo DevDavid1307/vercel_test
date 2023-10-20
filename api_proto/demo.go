@@ -7,7 +7,7 @@ import (
 )
 
 type DemoHTTPServer interface {
-	Greeter(DemoIndexRequest) (DemoIndexResponse, error)
+	Greeter(*DemoIndexRequest) (*DemoIndexResponse, error)
 }
 
 type DemoIndexRequest struct {
@@ -27,10 +27,10 @@ func RegisterDemoService(g *gin.Engine, srv DemoHTTPServer) {
 func _greeter_HTTP_Handler(srv DemoHTTPServer) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var in DemoIndexRequest
-		if err := c.BindQuery(&in); err != nil {
+		if err := c.ShouldBindUri(&in); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"err": "bad params"})
 		}
-		out, err := srv.Greeter(in)
+		out, err := srv.Greeter(&in)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"err": err.Error()})
 			return

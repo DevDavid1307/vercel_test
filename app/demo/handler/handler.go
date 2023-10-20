@@ -8,8 +8,8 @@ import (
 
 type demoHandler struct{}
 
-func (d *demoHandler) Greeter(params api_proto.DemoIndexRequest) (api_proto.DemoIndexResponse, error) {
-	return api_proto.DemoIndexResponse{
+func (d *demoHandler) Greeter(params *api_proto.DemoIndexRequest) (*api_proto.DemoIndexResponse, error) {
+	return &api_proto.DemoIndexResponse{
 		Message: fmt.Sprintf("Hello %s", params.Name),
 	}, nil
 }
